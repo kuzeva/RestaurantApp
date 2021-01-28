@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Food2Go.Data.interfaces;
+using Food2Go.Data.mocks;
 
 namespace Food2Go
 {
@@ -23,6 +25,10 @@ namespace Food2Go
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<IFoodRepository, MockFoodRepository>();
+            services.AddTransient<ICategoryRepository, MockCategoryRepository>();
+
+            services.AddMvcCore();
             services.AddControllersWithViews();
         }
 
